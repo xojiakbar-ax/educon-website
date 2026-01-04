@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ScrollTopButton } from "./ScrollToTopButton"
 
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import {
   GraduationCap,
   Users,
-  Target,
   TrendingUp,
   Globe,
   BookOpen,
   Code,
   Plane,
-  Calculator
+  Calculator,
 } from 'lucide-react';
 
 
@@ -22,9 +22,11 @@ interface HomePageProps {
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {
+
   useEffect(() => {
-    AOS.init({ duration: 800, once: true }); // AOS animatsiyalarini ishga tushurish
+    AOS.init({ duration: 800, once: true });
   }, []);
+
 
   const features = [
     { icon: Users, text: 'Xalqaro tajribaga ega malakali o‘qituvchilar' },
@@ -66,7 +68,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
       subtitle: 'Maktab dasturi va olimpiada tayyorgarligi',
       description: 'Mantiqiy fikrlashni rivojlantirib, akademik natijalaringizni oshiring.',
     },
-
     {
       icon: Plane,
       title: 'Xorijda ta’lim bo‘yicha konsultatsiya',
@@ -79,24 +80,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen relative">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-primary/80 text-primary-foreground overflow-hidden">
-        {/* Background rasm */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 opacity-30 pointer-events-none"
-          style={{
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            width: '100%',
-            height: '500px',
-            filter: 'blur(5px) brightness(0.7)',
-          }}
-        ></div>
-
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32" data-aos="fade-up">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl lg:text-6xl mb-6" data-aos="fade-down">
-              Educon Academy
-            </h1>
+            <h1 className="text-4xl lg:text-6xl mb-6" data-aos="fade-down">Educon Academy</h1>
             <p className="text-xl lg:text-3xl mb-4 opacity-95" data-aos="fade-up" data-aos-delay="100">
               Yorqin kelajak uchun moslashtirilgan ta’lim
             </p>
@@ -104,25 +90,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
               Til bilimi, akademik muvaffaqiyat va xalqaro imkoniyatlar shu yerdan boshlanadi.
             </p>
             <div className="flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90"
-                onClick={() => onNavigate('contact')}
-              >
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => onNavigate('contact')}>
                 Ro‘yxatdan o‘tish
               </Button>
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90"
-                onClick={() => onNavigate('contact')}
-              >
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => onNavigate('contact')}>
                 Markazimizga tashrif buyuring
               </Button>
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90"
-                onClick={() => onNavigate('contact')}
-              >
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => onNavigate('contact')}>
                 Bepul konsultatsiya olish
               </Button>
             </div>
@@ -133,7 +107,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
       {/* Why Educon Academy */}
       <section className="py-16 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-12" data-aos="fade-up">Nega aynan Educon Academy?</h2>
+          <h2
+            className="text-center mb-12 text-primary text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
+            data-aos="fade-up"
+          >
+            Nega aynan Educon Academy?
+          </h2>
+
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -154,12 +135,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
             })}
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Our Main Programs */}
-      <section className="py-16">
+      {/* Programs */}
+      <section className="py-16" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-12" data-aos="fade-up">Asosiy dasturlarimiz</h2>
+          <h2
+            className="text-center mb-12 text-primary text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
+            data-aos="fade-up"
+          >
+            Asosiy dasturlarimiz
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programs.map((program, index) => {
               const Icon = program.icon;
@@ -183,22 +170,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </Button>
           </div>
         </div>
-      </section>
+      </section >
 
+
+      <ScrollTopButton />
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
-          <h2 className="mb-4">Yo‘lingizni boshlashga tayyormisiz?</h2>
-          <p className="text-xl mb-8 opacity-95">Sizning kelajagingiz shu yerdan boshlanadi</p>
-          <Button
-            size="lg"
-            className="bg-white text-primary hover:bg-white/90"
-            onClick={() => onNavigate('contact')}
-          >
-            Hoziroq qo‘shiling
-          </Button>
-        </div>
-      </section>
-    </div>
+      <section className="py-16 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground"> <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up"> <h2 className="mb-4">Yo‘lingizni boshlashga tayyormisiz?</h2> <p className="text-xl mb-8 opacity-95">Sizning kelajagingiz shu yerdan boshlanadi</p> <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => onNavigate('contact')}> Hoziroq qo‘shiling </Button> </div> </section>
+    </div >
   );
 }

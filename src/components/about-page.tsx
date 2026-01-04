@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ScrollTopButton } from "./ScrollToTopButton"
+
 
 import { Card, CardContent } from './ui/card';
 import { Target, Lightbulb, BookOpen, Code, CheckCircle } from 'lucide-react';
@@ -139,7 +141,7 @@ export function AboutPage() {
           </div>
         </section>
 
-        {/* What Makes Us Different */}
+        <ScrollTopButton />
         {/* What Makes Us Different */}
         <section>
           <h2 className="text-center mb-10" data-aos="fade-up">

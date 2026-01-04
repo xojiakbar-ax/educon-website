@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Navigation } from './components/navigation';
 import { Footer } from './components/footer';
 import { HomePage } from './components/home-page';
@@ -20,22 +20,20 @@ export default function App() {
         return <CoursesPage onNavigate={setCurrentPage} />;
       case 'crm':
         return <CrmPage onNavigate={setCurrentPage} />;
-      case 'gallery':
-        return <GalleryPage />;
       case 'contact':
-        return <ContactPage />;
+        return <ContactPage onNavigate={setCurrentPage} />;
       default:
         return <HomePage onNavigate={setCurrentPage} />;
+
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
-      <main className="flex-1">
-        {renderPage()}
-      </main>
-      <Footer />
+
+      <main className="flex-1">{renderPage()}</main>
+      <Footer onNavigate={setCurrentPage} />
     </div>
   );
 }

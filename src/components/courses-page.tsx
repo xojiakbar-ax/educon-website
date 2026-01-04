@@ -2,8 +2,11 @@ import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import { ScrollTopButton } from './ScrollToTopButton';
+
 import { Card, CardContent, CardHeader } from './ui/card';
 import { Button } from './ui/button';
+
 import {
   BookOpen,
   GraduationCap,
@@ -12,6 +15,7 @@ import {
   Calculator,
   Plane,
   CheckCircle,
+  Brain,
 } from 'lucide-react';
 
 interface CoursesPageProps {
@@ -31,71 +35,113 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
     {
       icon: BookOpen,
       title: 'Ingliz Tili Kurslari',
-      levels: 'Darajalar: A1–C1',
-      special: 'Maxsus Dasturlar: IELTS, Akademik Ingliz Tili',
-      focus: ['Gapirish', 'Tinglash', 'O‘qish', 'Yozish', 'Grammatika', 'Imtihon Ko‘nikmalari'],
+      levels: 'Amaliy va ishonchli ingliz tili',
+      special: 'IELTS, Akademik Ingliz Tili va real muloqot',
+      focus: [
+        'Gapirish',
+        'Tinglash',
+        'O‘qish',
+        'Yozish',
+        'Grammatika',
+        'Imtihon Ko‘nikmalari',
+      ],
       benefits: [
         'Chet ellik va mahalliy o‘qituvchilar',
-        'Haftalik gapirish klublari',
+        'Haftalik speaking club',
         'Oylik sinov testlari',
       ],
-      bestFor: 'Imtihonlarga tayyorlanayotgan yoki xalqaro ta’limga intilayotgan talabalar',
+      bestFor:
+        'Xalqaro imtihonlar va chet el ta’limiga tayyorlanayotganlar uchun',
       color: 'bg-primary',
     },
     {
       icon: GraduationCap,
       title: 'Yapon Tili Kurslari',
-      levels: 'Darajalar: JLPT N5–N1',
-      special: 'To‘liq JLPT Tayyorlash',
+      levels: 'JLPTga tizimli tayyorgarlik',
+      special: 'JLPT standartlari asosida chuqur tayyorlov',
       focus: ['Grammatika', 'Lugat', 'Kanji', 'Tinglab tushunish'],
       benefits: [
-        'JLPT uslubidagi testlar',
-        'Rol o‘yinlari bilan gapirish amaliyoti',
-        'Madaniy muhit bilan tanishtirish',
+        'JLPT formatidagi testlar',
+        'Gapirish amaliyoti',
+        'Madaniy muhit',
       ],
-      bestFor: 'Yapon universitetlari yoki ish imkoniyatlarini ko‘zlagan talabalar',
+      bestFor: 'Yaponiyada o‘qish yoki ishlashni xohlovchilar uchun',
       color: 'bg-primary',
     },
     {
       icon: Globe,
       title: 'Rus Tili Kurslari',
-      levels: 'Boshlang‘ichdan ilg‘arigacha',
-      special: 'Amaliy muloqotga e’tibor',
-      focus: ['Suhbat ko‘nikmalari', 'Grammatika', 'O‘qish', 'Yozish'],
+      levels: 'Erkin muloqot va grammatik aniqlik',
+      special: 'Amaliy suhbat va to‘g‘ri grammatika',
+      focus: ['Suhbat', 'Grammatika', 'O‘qish', 'Yozish'],
       benefits: [
-        'Tuzilgan grammatika darslari',
-        'Haqiqiy hayot vaziyatlari',
-        'Madaniy kontekst',
+        'Real hayot misollari',
+        'Grammatikani chuqur o‘rganish',
+        'So‘z boyligini oshirish',
       ],
-      bestFor: 'Maktabdagi muvaffaqiyatni oshirmoqchi yoki sayohatga tayyorlanayotgan talabalar',
+      bestFor: 'Maktab va kundalik muloqot uchun',
       color: 'bg-primary',
     },
     {
       icon: Code,
       title: 'IT Kurslari',
-      levels: 'Boshlang‘ichdan o‘rta darajagacha',
-      special: 'Dasturlash va kompyuter savodxonligi',
-      focus: ['Asosiy dasturlash', 'Kompyuter savodxonligi', 'Muammo yechish', 'Mantiq'],
+      levels: 'Zamonaviy kasb va real loyihalar',
+      special: 'Amaliy dasturlash va muammo yechish',
+      focus: [
+        'Kompyuter savodxonligi',
+        'Asosiy dasturlash',
+        'Mantiq',
+        'Algoritmlar',
+      ],
       benefits: [
         'Amaliy loyihalar',
-        'Zamonaviy dasturlash tillari',
-        'Sanoatga mos ko‘nikmalar',
+        'Zamonaviy texnologiyalar',
+        'Kasbga yo‘naltirish',
       ],
-      bestFor: 'Texnologiyaga qiziqqan talabalar',
+      bestFor: 'IT sohasiga kirishni xohlovchilar uchun',
       color: 'bg-primary',
     },
     {
       icon: Calculator,
       title: 'Matematika Kurslari',
-      levels: 'Maktab dasturi & ilg‘or',
-      special: 'Olimpiadaga tayyorlash',
-      focus: ['Asosiy matematika', 'Muammo yechish', 'Tanlov tayyorgarligi', 'Mantiq'],
-      benefits: [
-        'Maktab dasturini qo‘llab-quvvatlash',
-        'Olimpiadaga tayyorgarlik',
-        'Individual yondashuv',
+      levels: 'Mantiqiy va aniq yondashuv',
+      special: 'Murakkab masalalarni oson yechish',
+      focus: [
+        'Asosiy matematika',
+        'Mantiq',
+        'Tanlov tayyorgarligi',
+        'Olimpiada',
       ],
-      bestFor: 'Olimpiadaga va tanlovlarga tayyorlanayotgan talabalar',
+      benefits: [
+        'Individual yondashuv',
+        'Olimpiadaga tayyorlov',
+        'Natijaga yo‘naltirilgan darslar',
+      ],
+      bestFor: 'Tanlov va imtihonlarga tayyorlanayotganlar uchun',
+      color: 'bg-primary',
+    },
+
+    // ✅ AI BILAN ISHLASH KURSI
+    {
+      icon: Brain,
+      title: 'AI bilan samarali ishlash',
+      levels: 'Sun’iy intellektdan to‘g‘ri foydalanish',
+      special:
+        'AI vositalaridan real ish va o‘qishda samarali foydalanish. Prompt yozish, avtomatlashtirish va real loyihalar.',
+      focus: [
+        'Prompt Engineering',
+        'ChatGPT va AI tools',
+        'Avtomatlashtirish',
+        'AI bilan kontent',
+        'AI bilan kod va analiz',
+      ],
+      benefits: [
+        'Real amaliy loyihalar',
+        'Ish jarayoniga mos mashqlar',
+        'AI’dan maksimal foyda olish',
+      ],
+      bestFor:
+        'Talabalar, IT, dizayn, marketing va AI’dan foyda olishni istaganlar uchun',
       color: 'bg-primary',
     },
   ];
@@ -103,11 +149,10 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
   return (
     <div className="min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Header */}
         <div className="text-center mb-16" data-aos="fade-up">
           <h1 className="mb-4">Bizning Kurslarimiz</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground">
             Talabalar uchun xalqaro standartdagi ta’lim
           </p>
         </div>
@@ -130,19 +175,19 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
                     </div>
                     <div>
                       <h2 className="mb-1">{course.title}</h2>
-                      <p className="opacity-95">{course.levels}</p>
+                      <p className="opacity-90">{course.levels}</p>
                     </div>
                   </div>
                 </CardHeader>
 
                 <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <h4 className="mb-3">E’tibor Qaratilgan Yo‘nalishlar</h4>
+                      <h4 className="mb-3">Yo‘nalishlar</h4>
                       <div className="flex flex-wrap gap-2 mb-6">
-                        {course.focus.map((item, idx) => (
+                        {course.focus.map((item, i) => (
                           <span
-                            key={idx}
+                            key={i}
                             className="px-3 py-1 bg-secondary rounded-full text-sm"
                           >
                             {item}
@@ -150,26 +195,22 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
                         ))}
                       </div>
                       <div className="bg-secondary/50 p-4 rounded-lg">
-                        <p className="text-sm">
-                          <strong>Maxsus:</strong> {course.special}
-                        </p>
+                        <strong>Maxsus:</strong> {course.special}
                       </div>
                     </div>
 
                     <div>
                       <h4 className="mb-3">Afzalliklar</h4>
                       <ul className="space-y-2 mb-6">
-                        {course.benefits.map((benefit, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                            <span>{benefit}</span>
+                        {course.benefits.map((b, i) => (
+                          <li key={i} className="flex gap-2">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            {b}
                           </li>
                         ))}
                       </ul>
-                      <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
-                        <p className="text-sm">
-                          <strong>Kimlar uchun mos:</strong> {course.bestFor}
-                        </p>
+                      <div className="border border-primary/20 p-4 rounded-lg">
+                        <strong>Kimlar uchun:</strong> {course.bestFor}
                       </div>
                     </div>
                   </div>
@@ -177,75 +218,96 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
               </Card>
             );
           })}
-        </div>
-
-        {/* ✅ STUDY ABROAD — TO‘LIQ CARD */}
-        <Card
-          className="overflow-hidden hover:shadow-lg transition-shadow"
-          data-aos="fade-up"
-        >
-          <CardHeader className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
-                <Plane className="w-8 h-8" />
-              </div>
-              <div>
-                <h2 className="mb-1">Chet Elda Ta’lim Maslahati</h2>
-                <p className="opacity-95">
-                  Xalqaro universitetlarga yo‘l ochamiz
-                </p>
-              </div>
-            </div>
-          </CardHeader>
-
-          <CardContent className="p-6 bg-background text-foreground">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="mb-3">Biz Nimalarda Yordam Beramiz</h4>
-                <ul className="space-y-2">
-                  {[
-                    'Universitet tanlash',
-                    'Hujjat topshirish',
-                    'Viza jarayonlari',
-                    'IELTS va til tayyorlash',
-                    'Grant va stipendiyalar',
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="mb-3">Kimlar Uchun Mos</h4>
-                <div className="bg-secondary/50 p-4 rounded-lg mb-6">
-                  <p className="text-sm">
-                    Xorijda bakalavr, magistratura yoki til kurslarida
-                    o‘qishni rejalashtirayotgan talabalar uchun.
+          <Card
+            className="overflow-hidden hover:shadow-lg transition-shadow mt-8"
+            data-aos="fade-up"
+          >
+            <CardHeader className="bg-gradient-to-br from-primary to-primary/90 text-white p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                  <Plane className="w-8 h-8" />
+                </div>
+                <div>
+                  <h2 className="mb-1">Chet Elda Ta’lim</h2>
+                  <p className="opacity-95">
+                    Xalqaro universitetlarga professional maslahat
                   </p>
                 </div>
-                <Button onClick={() => onNavigate('contact')}>
-                  Maslahat Olish
-                </Button>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardHeader>
+
+            <CardContent className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                {/* CHAP TOMON */}
+                <div>
+                  <h4 className="mb-3">Biz Yordam Beradigan Yo‘nalishlar</h4>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {[
+                      'Universitet tanlash',
+                      'Hujjat topshirish',
+                      'Viza jarayonlari',
+                      'IELTS tayyorlov',
+                      'Grant va stipendiyalar',
+                    ].map((item, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 bg-secondary rounded-full text-sm"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="bg-secondary/50 p-4 rounded-lg mb-6">
+                    <p className="text-sm">
+                      <strong>Maxsus:</strong> Har bir talaba uchun individual yo‘l xaritasi,
+                      universitet talablariga mos hujjatlar va to‘liq kuzatuv.
+                    </p>
+                  </div>
+
+                  {/* ✅ CTA CHAP TOMONDA */}
+                  <Button onClick={() => onNavigate('contact')}>
+                    Maslahat Olish
+                  </Button>
+                </div>
+
+                {/* O‘NG TOMON */}
+                <div>
+                  <h4 className="mb-3">Afzalliklar</h4>
+
+                  <ul className="space-y-2 mb-6">
+                    {[
+                      'Xalqaro universitetlar bilan tajriba',
+                      'Hujjatlarda xatolarsiz topshirish',
+                      'Viza jarayonida maslahat',
+                      'Grant va til bo‘yicha yordam',
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                    <p className="text-sm">
+                      <strong>Kimlar uchun mos:</strong> Xorijda bakalavr, magistratura
+                      yoki til kurslarida o‘qishni rejalashtirayotgan talabalar uchun.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
 
-        {/* CTA */}
-        <div className="text-center mt-16" data-aos="fade-up">
-          <h2 className="mb-4">O‘rganish Safaringizni Boshlashga Tayormisiz?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Maqsadlaringizga mos keladigan kursni tanlang va kelajagingizni bugun qurishni boshlang.
-          </p>
-          <Button size="lg" onClick={() => onNavigate('contact')}>
-            Ro'yxatdan o'tish
-          </Button>
+
+
         </div>
 
+        <ScrollTopButton />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ScrollTopButton } from "./ScrollToTopButton"
+
 
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
@@ -224,7 +226,7 @@ export function CrmPage({ onNavigate }: CrmPageProps) {
             Bugun Boshlang
           </Button>
         </div>
-
+        <ScrollTopButton />
       </div>
     </div>
   );
